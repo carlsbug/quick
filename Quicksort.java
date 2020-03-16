@@ -1,52 +1,50 @@
-
-public class QuickSort {
+public class QuickSort{
 	public void sort(int arr[], int low, int high)
 	{
-		if(low < high)
+		if (low < high)
 		{
-			int pivot = partition(arr, low, high);
+			int p = partition(arr,low,high);
 			
-			sort(arr, low, pivot-1);
-			sort(arr, pivot+1, high);
+			sort(arr, low, p-1);
+			sort(arr, p+1, high);
 		}
 	}
 	public int partition(int arr[], int low, int high)
 	{
-		int pivot = arr[high];
+		//pivot for highest
+		int p = arr[high];
 		int divider = low - 1;
-		for(int i = low; i < high; i++)
+		for(int j = low; j < high; j++)
 		{
-			if(pivot >= arr[i])
+			if(p >= arr[j])
 			{
-				divider++; // move the pivot one cell to the right
-				
-				int temp = arr[i];
-				arr[i] = arr[divider];
+				divider++;
+				int temp = arr[j];
+				arr[j] = arr[divider];
 				arr[divider] = temp;
-				
 			}
 		}
-		int temp = arr[divider+1];
-		arr[divider+1] = pivot;
+		divider++;
+		int temp = arr[divider];
+		arr[divider] = p;
 		arr[high] = temp;
 		
-		return divider+1;
+		return divider;
 	}
-    static void printArray(int arr[]) 
-    { 
-        int n = arr.length; 
-        for (int i=0; i<n; ++i) 
-            System.out.print(arr[i]+" "); 
-        System.out.println(); 
-    } 
+	public void print(int arr[])
+	{
+		for(int i = 0 ; i < arr.length;i++)
+		{
+			System.out.print(arr[i] + " ");
+		}
+	}
 	
 	public static void main(String args[])
 	{
-		int arr[] = {5, 3, 6, 10, 4, 2, 1};
-		QuickSort hi = new QuickSort();
-		hi.sort(arr, 0, arr.length-1);
-		 System.out.println("sorted array"); 
-		printArray(arr);
+		int arr[] = {1,3,5,57,4,2,5,2,1,-1,3};
+		QuickSort myQuick = new QuickSort();
+		myQuick.sort(arr,0,arr.length-1);
+		myQuick.print(arr);
 		
 	}
 }
